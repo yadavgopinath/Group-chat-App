@@ -23,7 +23,16 @@ if (existingUser) {
     return res.status(400).json({ message: 'User already exists with this email or phone number' });
 }
 
-const newUser = await Users.create({ name, email, phoneno, password });
+
+     
+const hashedPassword = await bcrypt.hash(password, 10); 
+
+const newUser = await Users.create({ 
+    name,
+     email:email.toLowerCase(),
+      phoneno,
+ password:hashedPassword 
+});
 
 
 res.status(201).json({ message: 'User added successfully', user: newUser });
