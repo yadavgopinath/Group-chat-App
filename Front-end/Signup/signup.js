@@ -10,11 +10,7 @@ document.getElementById('signup-form').addEventListener('submit', async function
     var password = document.getElementById('password').value;
     var phone = document.getElementById('phone').value;
   
-    if (phone.length !== 10) {
-        errorMsg.style.display = 'block';
-        errorMsg.innerText = 'Please enter a 10-digit phone number!';
-        return; 
-      }
+    
 
   
     
@@ -23,6 +19,11 @@ document.getElementById('signup-form').addEventListener('submit', async function
       errorMsg.innerText = 'Please fill in all the required fields!';
       return; 
     }
+    if (phone.length !== 10) {
+        errorMsg.style.display = 'block';
+        errorMsg.innerText = 'Please enter a 10-digit phone number!';
+        return; 
+      }
   
     var signupBtn = document.getElementById('signup-btn');
     var spinner = document.getElementById('loading-spinner');
