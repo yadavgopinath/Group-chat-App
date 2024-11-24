@@ -1,23 +1,41 @@
 
-const messageArea = document.getElementById('message-area');
-const chatInput = document.getElementById('chat-input');
-const sendBtn = document.getElementById('send-btn');
+const messageInput = document.getElementById('chat-input');  
+const sendButton = document.getElementById('send-btn');
 
 
-const addMessage = (type, text) => {
-  const messageDiv = document.createElement('div');
-  messageDiv.className = `message ${type}`;
-  messageDiv.textContent = text;
-  messageArea.appendChild(messageDiv);
-  messageArea.scrollTop = messageArea.scrollHeight; 
-};
 
-sendBtn.addEventListener('click', () => {
-  const message = chatInput.value.trim();
-  if (message) {
-    addMessage('chat', `You: ${message}`);
-    chatInput.value = '';
+sendButton.addEventListener('click', function() {
+  const message = messageInput.value.trim(); 
+
+  if (message === '') {
+    alert('Please enter a message!');
+    return;
   }
+
+ 
+  const token = localStorage.getItem('token');
+  
+
+  if (!token) {
+    alert('You need to be logged in to send a message.');
+    return;
+  }
+
+  // Create the message payload
+  const payload = {
+    message: message
+  };
+
+  axios.post('http://localhost:3000/text/message', payload,{headers:{'Authorization':token}})
+  .then(response => {
+    
+    console.log('Message sent:', response.data);
+    
+    messageInput.value = '';
+  })
+  .catch(error => {
+   
+    console.error('Error sending message:', error);
+    alert('Failed to send message. Please try again.');
+  });
 });
-
-

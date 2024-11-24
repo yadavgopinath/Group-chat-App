@@ -10,12 +10,17 @@ app.use(cors({
 app.use(bodyParser.json({extended:false}));
 app.use(express.urlencoded({ extended: true }));
 const Users = require('./models/user');
+const chatMessages = require('./models/chatMessage');
 
 const userroutes = require('./routes/user');
-
+const textroutes = require('./routes/message');
 
 app.use('/user',userroutes);
+app.use('/text',textroutes);
 
+
+Users.hasMany(chatMessages, { onDelete: 'CASCADE' });
+chatMessages.belongsTo(Users);
 
 sequelize.sync()
 .then((result)=>{

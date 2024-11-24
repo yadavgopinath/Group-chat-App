@@ -41,7 +41,9 @@ document.getElementById('login-form').addEventListener('submit', async function(
           if(response.data.token){
             localStorage.setItem('token',response.data.token)
           }
-        //  window.location.href = ''; 
+          window.location.href = '../chatapp01/chatapp.html';
+
+
   
             
            // errorMsg.innerText = `${response.data.message}`;

@@ -47,7 +47,7 @@ document.getElementById('signup-form').addEventListener('submit', async function
     var phone = document.getElementById('phone').value= '';
     alert('SingUp successfully:')
         console.log('Form submitted successfully:', response.data);
-       // window.location.href = '/Login/login.html';
+        window.location.href = '../Login/login.html';
 
         signupBtn.disabled = false;
         spinner.classList.add('d-none');
