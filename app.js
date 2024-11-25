@@ -19,8 +19,8 @@ app.use('/user',userroutes);
 app.use('/text',textroutes);
 
 
-Users.hasMany(chatMessages, { onDelete: 'CASCADE' });
-chatMessages.belongsTo(Users);
+Users.hasMany(chatMessages, { foreignKey: 'userId', onDelete: 'CASCADE' });
+chatMessages.belongsTo(Users, { foreignKey: 'userId' });
 
 sequelize.sync()
 .then((result)=>{
