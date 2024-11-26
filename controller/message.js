@@ -37,16 +37,16 @@ exports.getMessages = async(req,res,next)=>{
             include: [
               {
                 model: Users,
-                attributes: ['name'],
+                attributes: ['id', 'name'],
               },
             ],
             order: [['createdAt', 'ASC']],
             limit: 1000,
           });
       
-          // Handle possible null User gracefully
+          // Format the messages
           const formattedMessages = messages.map((msg) => ({
-            name: msg.User ? msg.User.name : 'Unknown User', // Fallback for missing User
+            name: msg.user ? msg.user.name : 'Unknown User', // Corrected user reference
             message: msg.message,
           }));
       
