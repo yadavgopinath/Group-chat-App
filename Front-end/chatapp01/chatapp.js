@@ -47,7 +47,8 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Error loading messages:', error);
       })
       .finally(() => {
-        setTimeout(loadMessages, 1000); 
+       // loadMessages();
+       // setTimeout(loadMessages, 1000); 
       });
   };
 
@@ -64,8 +65,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     
     messageArea.scrollTop = messageArea.scrollHeight;
-
-    setTimeout(displayMessages, 1000); 
+    
+ //   setTimeout(displayMessages, 1000); 
   };
 
   // Send a new message
@@ -107,3 +108,73 @@ document.addEventListener('DOMContentLoaded', function () {
   displayMessages(); 
 });
 
+
+
+
+
+//group chat
+document.addEventListener("DOMContentLoaded", function () {
+  const groupSidebar = document.getElementById("group-sidebar");
+  const groupList = document.getElementById("group-list");
+  const createGroupBtn = document.getElementById("create-group-btn");
+  const messageArea = document.getElementById("message-area");
+  const chatInput = document.getElementById("chat-input");
+  const sendBtn = document.getElementById("send-btn");
+
+  let currentGroupId = null;
+
+  // Fetch and display groups
+  function fetchGroups() {
+    const token = localStorage.getItem('token');
+
+   
+    axios.get('http://localhost:3000/groups/user-groups',{headers: { Authorization: token }}) // Replace with your endpoint
+      .then(response => {
+        const groups = response.data.groups;
+        console.log(groups);
+        groupList.innerHTML = '';
+        groups.forEach(group => {
+          const li = document.createElement('li');
+          li.textContent = group.name;
+          li.dataset.groupId = group.id;
+          li.addEventListener('click', () => loadGroupMessages(group.id,group.isAdmin));
+          groupList.appendChild(li);
+        });
+      })
+      .catch(error => console.error(error));
+  }
+
+  // Load messages for a specific group
+  function loadGroupMessages(groupId,isadmin) {
+    localStorage.setItem('isAdmin',isadmin);
+    localStorage.setItem('groupid',groupId);
+    window.location.href = './testing.html';
+  }
+
+  // Create a new group
+  createGroupBtn.addEventListener('click', function () {
+    const groupName = prompt("Enter group name:");
+    const token = localStorage.getItem('token');
+    if (groupName) {
+      axios.post('http://localhost:3000/groups/create', { name: groupName },{headers: { Authorization: token }}) // Replace with your endpoint
+        .then(() => fetchGroups())
+        .catch(error => console.error(error));
+    }
+  });
+
+  // Send a message
+  sendBtn.addEventListener('click', function () {
+    const text = chatInput.value;
+    if (text && currentGroupId) {
+      axios.post(`/api/groups/${currentGroupId}/messages`, { text }) // Replace with your endpoint
+        .then(() => {
+          chatInput.value = '';
+          loadGroupMessages(currentGroupId);
+        })
+        .catch(error => console.error(error));
+    }
+  });
+
+  // Fetch groups on load
+  fetchGroups();
+});
