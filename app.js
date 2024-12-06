@@ -30,7 +30,9 @@ app.use('/user',userroutes);
 app.use('/text',textroutes);
 app.use('/groups',grouproutes);
 app.use((req, res) => {
-    res.status(404).send('File not found');
+
+   console.log(req.url);
+  res.sendFile(path.join(__dirname,`Front-end/${req.url}`))
 });
 
 
