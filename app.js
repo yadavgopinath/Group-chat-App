@@ -31,7 +31,7 @@ app.use('/text',textroutes);
 app.use('/groups',grouproutes);
 app.use((req, res) => {
 
-   console.log(req.url);
+   console.log("request Url=>"+req.url);
   res.sendFile(path.join(__dirname,`Front-end/${req.url}`))
 });
 
