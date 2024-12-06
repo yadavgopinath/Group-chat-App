@@ -25,18 +25,12 @@ const grouproutes = require('./routes/group');
 app.use(compression());
 app.use(helmet());
 
-
+app.use(express.static(path.join(__dirname, 'Front-end')));
 app.use('/user',userroutes);
 app.use('/text',textroutes);
 app.use('/groups',grouproutes);
 app.use((req, res) => {
-    res.sendFile(path.join(__dirname, 'Front-end', req.url), (err) => {
-        console.log(req.url);
-
-        if (err) {
-            res.status(404).send('File not found');
-        }
-    });
+    res.status(404).send('File not found');
 });
 
 
