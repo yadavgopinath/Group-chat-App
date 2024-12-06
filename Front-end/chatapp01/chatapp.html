@@ -13,9 +13,73 @@
     body {
       background-color: #f1f5f9;
       font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
+     margin: 0;
+     padding: 0;
     }
+
+
+
+
+/* General container styling */
+.my-grp {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 0px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styling */
+.btn-small {
+  background-color: #007bff; /* Primary button color */
+  color: #fff; /* White text */
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px; /* Small button */
+  font-size: 14px; /* Smaller font size */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Button hover effect */
+.btn-small:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  transform: translateY(-1px); /* Slight lift effect */
+}
+
+/* Heading styling */
+.my-groups-heading {
+  font-size: 20px;
+  font-weight: 400;
+  color: #333; /* Darker color for better visibility */
+  margin: 0;
+  flex-grow: 1; /* Pushes button to the right */
+  text-align: center; /* Center-align heading */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .my-grp {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-small {
+    margin-bottom: 10px;
+  }
+
+  .my-groups-heading {
+    text-align: center;
+  }
+}
+
+
 
     .chat-header {
       background: linear-gradient(to right, #6FAAFF, #955DFF);
@@ -138,36 +202,44 @@
   padding: 10px;
   background-color: #f8f9fa;
   border-bottom: 1px solid #ddd;
-  height: 200px;  /* Fixed height */
+  max-height: 300px;  /* Fixed height */
   overflow: hidden;  /* Prevent content from overflowing */
 }
 
-    .group-chat button {
-      padding: 10px 15px;
-      font-size: 16px;
+   /* .group-chat button {
+      padding: 1px 1px;
+      font-size: 10px;
       border: none;
       background-color: #007bff;
       color: white;
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s;
-    }
+    }*/
 
     .group-chat button:hover {
       background-color: #0056b3;
     }
 
     .group-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  overflow-y: auto;  /* Make the group list scrollable */
-  max-height: 150px;  /* Limit the scrollable area */
+      list-style-type: none; /* Remove bullet points */
+  margin: 0; /* Remove default margin */
+  padding: 5px; /* Add some padding for spacing */
+  width: 100%; /* Full width of the parent container */
+  height: 300px; /* Fixed height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  border: 1px solid #ddd; /* Subtle border */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background color */
+  font-size: 14px; /* Smaller font for better fit */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+.my-grp{
+  display: flex;  
 }
 
 .group-list li {
-  padding: 10px;
+  padding: 8px;
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: white;
@@ -193,11 +265,9 @@
 </head>
 <body>
   <div class="chat-header">ChatApp</div>
-  <div class="group-chat">
-    <button id="create-group-btn" class="btn btn-primary">Create Group</button>
-    <ul class="group-list" id="group-list"></ul>
-  </div>
+  
   <div class="chat-container">
+    <div class="my-grp"> <h1 class="my-groups-heading">Public ChatRoom</h1></div>
     <div class="message-area" id="message-area">
       <!-- Messages will appear here -->
     </div>
@@ -206,6 +276,15 @@
       <button id="send-btn">Send</button>
     </div>
   </div>
+  <div class="group-chat">
+  
+    <div class="my-grp">
+      <button id="create-group-btn" class="btn-small">+ Create Group</button>
+      <h2 class="my-groups-heading">My Groups</h2>
+    </div>
+    
+     <ul class="group-list" id="group-list"></ul>
+   </div>
   
   <script src="chatapp.js"></script>
  

@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function loadGroupMessages(groupId,isadmin) {
     localStorage.setItem('isAdmin',isadmin);
     localStorage.setItem('groupid',groupId);
-    window.location.href = './testing.html';
+    window.location.href = './group-chat.html';
   }
 
   // Create a new group
