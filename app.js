@@ -21,19 +21,38 @@ const GroupMessage = require('./models/group-message');
 const userroutes = require('./routes/user');
 const textroutes = require('./routes/message');
 const grouproutes = require('./routes/group');
+// Add the Cross-Origin-Opener-Policy (COOP) header middleware
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Opener-Policy", "unsafe-none");
+  next();
+});
+
+// Optional: Add Content-Security-Policy header for form action as fallback
+app.use((req, res, next) => {
+  res.setHeader("Content-Security-Policy", "script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;");
+  next();
+});
+
 
 app.use(compression());
 app.use(helmet());
 
-app.use(express.static(path.join(__dirname, 'Front-end')));
+//app.use(express.static(path.join(__dirname, 'public')));
 app.use('/user',userroutes);
 app.use('/text',textroutes);
 app.use('/groups',grouproutes);
-app.use((req, res) => {
-
-   console.log("request Url=>"+req.url);
-  res.sendFile(path.join(__dirname,`Front-end/${req.url}`))
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Opener-Policy", "unsafe-none");
+  next();
 });
+app.use((req, res, next) => {
+  res.setHeader("Content-Security-Policy", "script-src 'self' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;");
+  next();
+});
+app.use((req,res)=>{
+  console.log(req.url);
+  res.sendFile(path.join(__dirname,`public/${req.url}`))
+})
 
 
 Users.hasMany(chatMessages, { foreignKey: 'userId', onDelete: 'CASCADE' });
