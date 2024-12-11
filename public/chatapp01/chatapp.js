@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Error loading messages:', error);
       })
       .finally(() => {
-       // loadMessages();
-       // setTimeout(loadMessages, 1000); 
+        loadMessages();
+        setTimeout(loadMessages, 1000); 
       });
   };
 
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     messageArea.scrollTop = messageArea.scrollHeight;
     
- //   setTimeout(displayMessages, 1000); 
+   setTimeout(displayMessages, 1000); 
   };
 
   // Send a new message
