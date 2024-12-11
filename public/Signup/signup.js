@@ -39,7 +39,7 @@ document.getElementById('signup-form').addEventListener('submit', async function
     };
   
    
- await    axios.post('http://localhost:3000/user/signup', data)
+ await    axios.post('http://98.81.181.215:3000/user/signup', data)
       .then(function(response) {
         var name = document.getElementById('name').value = '';
     var email = document.getElementById('email').value = '';

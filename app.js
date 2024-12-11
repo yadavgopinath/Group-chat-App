@@ -10,6 +10,7 @@ const helmet = require('helmet');
 app.use(cors({
     origin:"*"
 }));
+//updated finally
 app.use(bodyParser.json({extended:false}));
 app.use(express.urlencoded({ extended: true }));
 const Users = require('./models/user');

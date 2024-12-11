@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const lastMessageId = localStorage.getItem('lastMessageId') || -1;
 
     axios
-      .get(`http://localhost:3000/text/messages?lastMessageId=${lastMessageId}`, {
+      .get(`http://98.81.181.215:3000/text/messages?lastMessageId=${lastMessageId}`, {
         headers: { Authorization: token },
       })
       .then((response) => {
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const payload = { message };
     axios
-      .post('http://localhost:3000/text/message', payload, {
+      .post('http://98.81.181.215:3000/text/message', payload, {
         headers: { Authorization: token },
       })
       .then(() => {
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const token = localStorage.getItem('token');
 
    
-    axios.get('http://localhost:3000/groups/user-groups',{headers: { Authorization: token }}) // Replace with your endpoint
+    axios.get('http://98.81.181.215:3000/groups/user-groups',{headers: { Authorization: token }}) // Replace with your endpoint
       .then(response => {
         const groups = response.data.groups;
         console.log(groups);
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const groupName = prompt("Enter group name:");
     const token = localStorage.getItem('token');
     if (groupName) {
-      axios.post('http://localhost:3000/groups/create', { name: groupName },{headers: { Authorization: token }}) // Replace with your endpoint
+      axios.post('http://98.81.181.215:3000/groups/create', { name: groupName },{headers: { Authorization: token }}) // Replace with your endpoint
         .then(() => fetchGroups())
         .catch(error => console.error(error));
     }
